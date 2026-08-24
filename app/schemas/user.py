@@ -1,6 +1,6 @@
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, EmailStr
-
+from app.models.user import UserRole
 
 class UserBase(BaseModel):
     email: EmailStr
@@ -18,12 +18,18 @@ class UserUpdate(BaseModel):
     is_active: bool | None = None
 
 
-class UserResponse(UserBase):
+class UserResponse(BaseModel):
     id: int
-    role: str
+    email: EmailStr
+    full_name: str
+    role: UserRole
     is_active: bool
     created_at: datetime
 
     model_config = ConfigDict(
         from_attributes=True
     )
+
+
+class UserListResponse(UserResponse):
+    pass

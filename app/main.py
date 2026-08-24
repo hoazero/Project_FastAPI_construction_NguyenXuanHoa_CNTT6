@@ -8,8 +8,8 @@ from app.models.user import User
 from app.models.site import ConstructionSite, SiteMember
 from app.models.work_item import WorkItem
 
-# from routers.auth import 
-# from routers.users import 
+from app.routers.auth import router as auth_router
+from app.routers.users import router as user_router
 # from routers.site import 
 # from routers.work_item import 
 
@@ -70,8 +70,8 @@ def general_exception_handler(
         )
     )
 
-# app.include_router(auth.router)
-# app.include_router(users.router)
+app.include_router(auth_router)
+app.include_router(user_router)
 # app.include_router(site.router)
 # app.include_router(work_item.router)
 

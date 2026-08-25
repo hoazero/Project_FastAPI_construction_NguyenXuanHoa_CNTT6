@@ -10,7 +10,7 @@ from app.models.work_item import WorkItem
 
 from app.routers.auth import router as auth_router
 from app.routers.users import router as user_router
-# from routers.site import 
+from app.routers.site import router as site_router
 # from routers.work_item import 
 
 from app.utils.response import error_response, success_response
@@ -72,7 +72,7 @@ def general_exception_handler(
 
 app.include_router(auth_router)
 app.include_router(user_router)
-# app.include_router(site.router)
+app.include_router(site_router)
 # app.include_router(work_item.router)
 
 @app.get("/health",tags=["Health"])

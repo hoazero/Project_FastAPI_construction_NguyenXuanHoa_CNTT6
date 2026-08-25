@@ -5,10 +5,11 @@ from fastapi import Request, status
 def success_response(
     request: Request,
     data=None,
-    message="Success"
+    message="Success",
+    status_code:int = status.HTTP_200_OK
 ):
     return {
-        "status_code": status.HTTP_200_OK,
+        "status_code": status_code,
         "message": message,
         "data": data,
         "errors": None,

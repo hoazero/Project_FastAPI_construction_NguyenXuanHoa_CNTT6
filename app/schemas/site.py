@@ -1,9 +1,11 @@
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict
+# from typing import Literal
+
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class SiteBase(BaseModel):
-    name: str
+    name: str = Field(min_length=1, max_length=255)
     description: str | None = None
 
 
@@ -12,7 +14,11 @@ class SiteCreate(SiteBase):
 
 
 class SiteUpdate(BaseModel):
-    name: str | None = None
+    name: str | None = Field(
+        default=None,
+        min_length=1,
+        max_length=255,
+    )
     description: str | None = None
 
 
@@ -28,7 +34,7 @@ class SiteResponse(SiteBase):
 
 class SiteMemberCreate(BaseModel):
     user_id: int
-    role: str = "MEMBER"
+    # role: Literal["MEMBER"] = "MEMBER"
 
 
 class SiteMemberResponse(BaseModel):

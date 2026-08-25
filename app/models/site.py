@@ -1,4 +1,6 @@
 from datetime import datetime
+from enum import Enum as PyEnum
+
 from sqlalchemy import (
     Column,
     DateTime,
@@ -10,6 +12,10 @@ from sqlalchemy import (
 )
 from sqlalchemy.orm import relationship
 from app.db.database import Base
+
+class SiteRole(str, PyEnum):
+    OWNER = "OWNER"
+    MEMBER = "MEMBER"
 
 class ConstructionSite(Base):
     __tablename__ = "construction_sites"

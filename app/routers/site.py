@@ -228,7 +228,7 @@ def get_construction_site(
     )
 
 
-@router.put("/{site_id}")
+@router.patch("/{site_id}")
 def update_construction_site(
     site_id: int,
     site_data: SiteUpdate,

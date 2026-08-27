@@ -39,8 +39,7 @@ def register(
     db: Session = Depends(get_db)
 ):
 
-    try:
-
+    try:        
         user = register_user(
             db,
             data

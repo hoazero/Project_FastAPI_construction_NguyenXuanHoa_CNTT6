@@ -12,15 +12,14 @@ def create_work_item(
     site_id: int,
     data: WorkItemCreate,
 ):
-    # work_item = WorkItem(
-    #     site_id=site_id,
-    #     title=data.title,
-    #     description=data.description,
-    #     due_date=data.due_date,
-    #     priority=data.priority.value,
-    #     status="TODO",
-    # )
-    work_item = WorkItem(**data.model_dump())
+    work_item = WorkItem(
+        site_id=site_id,
+        title=data.title,
+        description=data.description,
+        due_date=data.due_date,
+        priority=data.priority.value,
+        status="TODO",
+    )
 
     db.add(work_item)
     db.commit()

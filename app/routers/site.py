@@ -33,6 +33,7 @@ from app.services.site_service import (
     get_user_sites,
     update_site
 )
+from app.services.user_service import get_user_by_id
 from app.utils.response import (
     error_response,
     success_response,
@@ -47,7 +48,7 @@ router = APIRouter(
 
 @router.post(
     "",
-    status_code=status.HTTP_201_CREATED
+    status_code=status.HTTP_201_CREATED, summary="Tạo mới công trình", description="u/a tạo công trình"
 )
 def create_construction_site(
     site_data: SiteCreate,
@@ -113,6 +114,19 @@ def add_member(
     owner=Depends(require_site_owner),
     db: Session = Depends(get_db),
 ):
+
+    user = get_user_by_id(
+        db=db,
+        user_id=member_data.user_id,
+    )
+
+    if not user:
+        return error_response(
+            request=request,
+            status_code=status.HTTP_404_NOT_FOUND,
+            message="Người dùng không tồn tại",
+        )
+    
     # Kiểm tra user đã là member của công trình chưa
     existing_member = get_site_member(
         db=db,
